@@ -16,7 +16,7 @@ connection.query("SHOW TABLES", (err, results) => {
 } catch (err) {
   console.log(err);
 } 
-
+connection.end();
 
 let getRandomUser = () => {
   return {
