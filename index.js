@@ -52,6 +52,14 @@ connection.query(q , (err, users) => {
 } 
 });
   
+//Edit Route
+app.get("/users/:id/edit", (req, res) => {
+  let { id } = req.params;
+  let q = `SELECT * FROM user WHERE id ='${id}'`;
+  res.render("edit.js");
+});
+   
+
 
 app.listen("8080", () => {
   console.log('Server is running on port 8080');
