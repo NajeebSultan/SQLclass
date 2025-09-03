@@ -39,6 +39,20 @@ connection.query(q , (err, results) => {
 } 
 });
 
+//Show Route
+app.get("/users", (req, res) => {
+  let q = `SELECT * FROM user`;
+   try {
+connection.query(q , (err, users) => {
+  if (err) throw err;
+  res.render("showusers.ejs" , { users });
+});
+} catch (err) {
+  res.send("some error in DB");
+} 
+});
+  
+
 app.listen("8080", () => {
   console.log('Server is running on port 8080');
 }
