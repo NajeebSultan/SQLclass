@@ -22,21 +22,24 @@ let getRandomUser = () => {
 
 
 app.get('/', (req, res) => {
-  res.send("Welcome to the Home Page");
+  let q = `SELECT count(*) FROM user`;
+  try {
+connection.query(q , (err, results) => {
+  if (err) throw err;
+  console.log(results[0]["count(*)"]);
+  res.send(results);
+});
+} catch (err) {
+  console.log(err);
+  res.send("some error in DB");
+} 
+
 });
 
-app.listen(8080, () => {
+app.listen("8080", () => {
   console.log('Server is running on port 8080');
 }
 );
 
 
-// try {
-// connection.query(q , [data], (err, results) => {
-//   if (err) throw err;
-//   console.log(results);
-// });
-// } catch (err) {
-//   console.log(err);
-// } 
-// connection.end();
+
