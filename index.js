@@ -99,6 +99,24 @@ app.patch("/user/:id", (req, res) => {
   }
 });
 
+// New User Form
+app.get("/user/new", (req, res) => {
+  res.render("add.ejs");  // make sure you create views/new.ejs
+});
+
+
+// Add User (POST)
+app.post("/user", (req, res) => {
+  let { username, email, password } = req.body;
+  let id = faker.string.uuid(); // generate unique ID
+  let q = `INSERT INTO user (id, name, email, password) VALUES (?, ?, ?, ?)`;
+
+  connection.query(q, [id, username, email, password], (err, result) => {
+    if (err) throw err;
+    res.redirect("/users"); // redirect to all users
+  });
+});
+
 
 
 app.listen("8080", () => {
