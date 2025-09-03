@@ -6,6 +6,10 @@
   <title>Edit Username</title>
 </head>
 <body>
-  <h2>You are about to edit </h2>
+  <h2>You are about to edit <%= user.email  %> </h2>
+  <form>
+    <textarea name="username"> <%= user.username%> </textarea>
+    <input type="password" name="password" placeholder="enter password">
+  </form>
 </body>
 </html>

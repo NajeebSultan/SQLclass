@@ -56,7 +56,16 @@ connection.query(q , (err, users) => {
 app.get("/users/:id/edit", (req, res) => {
   let { id } = req.params;
   let q = `SELECT * FROM user WHERE id ='${id}'`;
-  res.render("edit.js");
+  try {
+connection.query(q , (err, result) => {
+  if (err) throw err;
+  let user = result[0];
+  res.render("edit.ejs" , {user});
+});
+} catch (err) {
+  res.send("some error in DB");
+} 
+
 });
    
 
