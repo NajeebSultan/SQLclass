@@ -6,7 +6,7 @@ const path = require("path");
 
 
 app.set('view engine', 'ejs');
-app.use("views",path.join(__dirname, "/views"));
+app.set("views",path.join(__dirname, "/views"));
 
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -26,19 +26,17 @@ let getRandomUser = () => {
 };
 
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   let q = `SELECT count(*) FROM user`;
   try {
 connection.query(q , (err, results) => {
   if (err) throw err;
-  console.log(results[0]["count(*)"]);
-  res.send(results);
+  let count = results[0]["count(*)"];
+  res.render("home.ejs" , { count });
 });
 } catch (err) {
-  console.log(err);
   res.send("some error in DB");
 } 
-
 });
 
 app.listen("8080", () => {
